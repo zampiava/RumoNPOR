@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RumoNPOR – Preparatório NPOR</title><meta name="description" content="Preparatório online para a seleção do NPOR. Entre na lista de espera."><link rel="stylesheet" href="style.css"></head><body>
+<header class="hero"><div class="w"><span class="tag">Lista de espera aberta</span>
+<h1>Preparatório NPOR: do alistamento à seleção</h1><p>Curso online com lançamento em <b>18/01/2027</b>.</p>
+<div class="cd" id="cd"><div><b id="d">--</b><span>dias</span></div><div><b id="h">--</b><span>horas</span></div><div><b id="m">--</b><span>min</span></div><div><b id="s">--</b><span>seg</span></div></div>
+<a class="btn" href="#inscricao">Entrar na lista</a></div></header>
+<section><div class="w"><h2>O que é o NPOR</h2>
+<p>O NPOR (Núcleo de Preparação de Oficiais da Reserva) forma oficiais da reserva de 2ª classe (R2) do Exército Brasileiro a partir de jovens que se apresentam no Serviço Militar Obrigatório. A seleção envolve alistamento, Seleção Geral, entrevista, inspeção de saúde e teste de aptidão física, conforme as regras de cada organização militar.</p>
+<p>A seleção é exigente. Este curso ajuda você a se organizar e a estudar com método. Ele não garante aprovação.</p></div></section>
+<section><div class="w"><h2>Os 7 módulos</h2><div class="grid g3">
+<div class="card"><span class="n">01</span><h3>NPOR e carreira R2</h3></div>
+<div class="card"><span class="n">02</span><h3>Alistamento e Seleção Geral</h3></div>
+<div class="card"><span class="n">03</span><h3>Entrevista</h3></div>
+<div class="card"><span class="n">04</span><h3>Inspeção de saúde</h3></div>
+<div class="card"><span class="n">05</span><h3>TAF</h3></div>
+<div class="card"><span class="n">06</span><h3>Português, Matemática e Redação</h3></div>
+<div class="card"><span class="n">07</span><h3>O que esperar do curso</h3></div></div></div></section>
+<section><div class="w"><h2>Remuneração (soldo)</h2>
+<table><tr><th>Graduação/posto</th><th style="text-align:right">Soldo</th></tr>
+<tr><td>Aspirante a Oficial</td><td>R$ 7.988</td></tr><tr><td>2º Tenente</td><td>R$ 8.179</td></tr><tr><td>1º Tenente</td><td>R$ 9.004</td></tr></table>
+<p><small>Fonte: Lei nº 15.167/2025. Valores de soldo sem adicionais e descontos. Não representam promessa de renda.</small></p></div></section>
+<section id="inscricao"><div class="w"><h2>Entre na lista de espera</h2>
+<p>Seja avisado primeiro quando as inscrições abrirem, com condição especial de lançamento.</p>
+<!-- ================== CONFIGURAÇÃO DO FORMULÁRIO ==================
+ 1) Crie um Google Formulário com: Nome, WhatsApp, E-mail (respostas vinculadas à planilha).
+ 2) Cole em FORM_URL o link ".../formResponse" do formulário (troque "viewform" por "formResponse").
+ 3) Cole os IDs dos campos (entry.XXXX) em FIELDS. Pegue-os em "Ver link pré-preenchido".
+ Se preferir só abrir o formulário, preencha FORM_LINK e deixe FORM_URL vazio.
+=================================================================== -->
+<form id="f" novalidate><label>Nome<input type="text" name="nome" required maxlength="100"></label>
+<label>WhatsApp (com DDD)<input type="tel" name="whats" required placeholder="(91) 99999-9999"></label>
+<label>E-mail<input type="email" name="email" required></label>
+<label><input type="checkbox" name="lgpd" required> Aceito receber comunicações do RumoNPOR por e-mail e WhatsApp; posso sair quando quiser.</label><br><br>
+<button class="btn" type="submit">Entrar na lista</button><div id="msg"></div></form></div></section>
+<section><div class="w"><h2>Perguntas frequentes</h2>
+<details><summary>Quando o curso abre?</summary><p>O lançamento está previsto para 18/01/2027. Quem estiver na lista de espera será avisado primeiro.</p></details>
+<details><summary>Com que idade posso participar?</summary><p>O alistamento acontece no ano em que você completa 18 anos (Lei 4.375/64). Dá pra começar a se preparar antes.</p></details>
+<details><summary>O curso garante aprovação?</summary><p>Não. O curso ajuda na preparação, mas o resultado depende de cada candidato e das regras da seleção.</p></details>
+<details><summary>O curso é oficial?</summary><p>Não. É um projeto independente, sem vínculo com o Exército.</p></details></div></section>
+<footer><div class="w"><p><b>Projeto independente, sem vínculo com o Exército.</b></p><p>Instagram: <a style="color:#d9b44a" href="https://www.instagram.com/rumonpor/">@rumonpor</a></p>
+<details id="privacidade"><summary>Política de privacidade</summary><p>Coletamos nome, WhatsApp e e-mail apenas para avisar sobre o lançamento do RumoNPOR. Os dados não são vendidos nem compartilhados com terceiros. Você pode pedir a exclusão ou sair da lista a qualquer momento pelo Instagram @rumonpor. Base legal: consentimento (LGPD, Lei 13.709/2018).</p></details>
+<small>© 2026 RumoNPOR</small></div></footer>
+<script>
+// ===== COLE AQUI O LINK DO GOOGLE FORMULÁRIO =====
+const FORM_URL = "";   // ex.: "https://docs.google.com/forms/d/e/XXXX/formResponse"
+const FORM_LINK = "";  // alternativa: link público do formulário (viewform), abre em nova aba
+const FIELDS = { nome:"entry.000000001", whats:"entry.000000002", email:"entry.000000003", lgpd:"entry.000000004" };
+// =================================================
+const alvo=new Date("2027-01-18T00:00:00-03:00").getTime();
+function tick(){let t=Math.max(0,alvo-Date.now());const z=n=>String(n).padStart(2,"0");
+d.textContent=Math.floor(t/864e5);h.textContent=z(Math.floor(t/36e5)%24);m.textContent=z(Math.floor(t/6e4)%60);s.textContent=z(Math.floor(t/1e3)%60);}
+tick();setInterval(tick,1000);
+f.addEventListener("submit",async e=>{e.preventDefault();const o=msg;
+if(!FORM_URL&&FORM_LINK){window.open(FORM_LINK,"_blank");return;}
+const nome=f.nome.value.trim(),tel=f.whats.value.replace(/\D/g,""),email=f.email.value.trim();
+if(!nome||tel.length<10||tel.length>13||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!f.lgpd.checked){o.textContent="Preencha todos os campos corretamente e aceite os termos.";return;}
+if(!FORM_URL){o.textContent="Inscrições em breve. Siga @rumonpor.";return;}
+const b=new FormData();b.append(FIELDS.nome,nome);b.append(FIELDS.whats,tel);b.append(FIELDS.email,email);b.append(FIELDS.lgpd,"Aceito");
+o.textContent="Enviando...";
+try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:b});f.reset();o.textContent="Pronto! Você está na lista de espera.";}catch(_){o.textContent="Não foi possível enviar. Tente novamente.";}});
+</script></body></html>
