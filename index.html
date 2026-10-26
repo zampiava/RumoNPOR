@@ -27,7 +27,7 @@
  3) Cole os IDs dos campos (entry.XXXX) em FIELDS. Pegue-os em "Ver link pré-preenchido".
  Se preferir só abrir o formulário, preencha FORM_LINK e deixe FORM_URL vazio.
 =================================================================== -->
-<form id="f" novalidate><label>Nome<input type="text" name="nome" required maxlength="100"></label>
+<form id="f" novalidate><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"><label>Nome<input type="text" name="nome" required maxlength="100"></label>
 <label>WhatsApp (com DDD)<input type="tel" name="whats" required placeholder="(91) 99999-9999"></label>
 <label>E-mail<input type="email" name="email" required></label>
 <label><input type="checkbox" name="lgpd" required> Aceito receber comunicações do RumoNPOR por e-mail e WhatsApp; posso sair quando quiser.</label><br><br>
@@ -38,24 +38,23 @@
 <details><summary>O curso garante aprovação?</summary><p>Não. O curso ajuda na preparação, mas o resultado depende de cada candidato e das regras da seleção.</p></details>
 <details><summary>O curso é oficial?</summary><p>Não. É um projeto independente, sem vínculo com o Exército.</p></details></div></section>
 <footer><div class="w"><p><b>Projeto independente, sem vínculo com o Exército.</b></p><p>Instagram: <a style="color:#d9b44a" href="https://www.instagram.com/rumonpor/">@rumonpor</a></p>
-<details id="privacidade"><summary>Política de privacidade</summary><p>Coletamos nome, WhatsApp e e-mail apenas para avisar sobre o lançamento do RumoNPOR. Os dados não são vendidos nem compartilhados com terceiros. Você pode pedir a exclusão ou sair da lista a qualquer momento pelo Instagram @rumonpor. Base legal: consentimento (LGPD, Lei 13.709/2018).</p></details>
+<details id="privacidade"><summary>Política de privacidade</summary><p>Coletamos nome, WhatsApp e e-mail apenas para avisar sobre o lançamento do RumoNPOR. Os dados não são vendidos. O envio é processado pelo serviço FormSubmit e armazenado em planilha privada do projeto. Você pode pedir a exclusão ou sair da lista a qualquer momento pelo Instagram @rumonpor. Base legal: consentimento (LGPD, Lei 13.709/2018).</p></details>
 <small>© 2026 RumoNPOR</small></div></footer>
 <script>
-// ===== COLE AQUI O LINK DO GOOGLE FORMULÁRIO =====
-const FORM_URL = "";   // ex.: "https://docs.google.com/forms/d/e/XXXX/formResponse"
-const FORM_LINK = "";  // alternativa: link público do formulário (viewform), abre em nova aba
-const FIELDS = { nome:"entry.000000001", whats:"entry.000000002", email:"entry.000000003", lgpd:"entry.000000004" };
+// ===== ENVIO: FormSubmit -> e-mail -> planilha "curso NPOR" =====
+const FORM_URL = "https://formsubmit.co/ajax/0dc058618bec036d7c23907687b87446";
 // =================================================
 const alvo=new Date("2027-01-18T00:00:00-03:00").getTime();
 function tick(){let t=Math.max(0,alvo-Date.now());const z=n=>String(n).padStart(2,"0");
 d.textContent=Math.floor(t/864e5);h.textContent=z(Math.floor(t/36e5)%24);m.textContent=z(Math.floor(t/6e4)%60);s.textContent=z(Math.floor(t/1e3)%60);}
 tick();setInterval(tick,1000);
 f.addEventListener("submit",async e=>{e.preventDefault();const o=msg;
-if(!FORM_URL&&FORM_LINK){window.open(FORM_LINK,"_blank");return;}
 const nome=f.nome.value.trim(),tel=f.whats.value.replace(/\D/g,""),email=f.email.value.trim();
 if(!nome||tel.length<10||tel.length>13||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!f.lgpd.checked){o.textContent="Preencha todos os campos corretamente e aceite os termos.";return;}
-if(!FORM_URL){o.textContent="Inscrições em breve. Siga @rumonpor.";return;}
-const b=new FormData();b.append(FIELDS.nome,nome);b.append(FIELDS.whats,tel);b.append(FIELDS.email,email);b.append(FIELDS.lgpd,"Aceito");
+const hp=f.querySelector('[name="_honey"]');if(hp&&hp.value)return;
+const dados={_subject:"RUMONPOR-INSCRICAO",_template:"table",_captcha:"false",Nome:nome,WhatsApp:tel,"E-mail":email,"Consentimento LGPD":"Aceito",Origem:"site"};
 o.textContent="Enviando...";
-try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:b});f.reset();o.textContent="Pronto! Você está na lista de espera.";}catch(_){o.textContent="Não foi possível enviar. Tente novamente.";}});
+try{const r=await fetch(FORM_URL,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(dados)});const j=await r.json().catch(()=>({}));
+if(r.ok&&String(j.success)==="true"){f.reset();o.textContent="Pronto! Você está na lista de espera.";}else throw 0;}
+catch(_){o.textContent="Não foi possível enviar. Tente novamente ou fale com @rumonpor.";}});
 </script></body></html>
