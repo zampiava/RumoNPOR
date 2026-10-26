@@ -27,11 +27,11 @@
  3) Cole os IDs dos campos (entry.XXXX) em FIELDS. Pegue-os em "Ver link pré-preenchido".
  Se preferir só abrir o formulário, preencha FORM_LINK e deixe FORM_URL vazio.
 =================================================================== -->
-<form id="f" novalidate><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"><label>Nome<input type="text" name="nome" required maxlength="100"></label>
-<label>WhatsApp (com DDD)<input type="tel" name="whats" required placeholder="(91) 99999-9999"></label>
-<label>E-mail<input type="email" name="email" required></label>
-<label><input type="checkbox" name="lgpd" required> Aceito receber comunicações do RumoNPOR por e-mail e WhatsApp; posso sair quando quiser.</label><br><br>
-<button class="btn" type="submit">Entrar na lista</button><div id="msg"></div></form></div></section>
+<form id="f" action="https://formsubmit.co/0dc058618bec036d7c23907687b87446" method="POST" novalidate><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"><input type="hidden" name="_subject" value="RUMONPOR-INSCRICAO"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://zampiava.github.io/RumoNPOR/obrigado.html"><input type="hidden" name="Origem" value="site"><label>Nome<input type="text" name="Nome" required autocomplete="name" maxlength="100"></label>
+<label>WhatsApp (com DDD)<input type="tel" name="WhatsApp" required autocomplete="tel" placeholder="(91) 99999-9999"></label>
+<label>E-mail<input type="email" name="E-mail" required autocomplete="email"></label>
+<label><input type="checkbox" name="Consentimento LGPD" value="Aceito" required> Aceito receber comunicações do RumoNPOR por e-mail e WhatsApp; posso sair quando quiser.</label><br><br>
+<button class="btn" id="bt" type="submit">Entrar na lista</button><div id="msg"></div></form></div></section>
 <section><div class="w"><h2>Perguntas frequentes</h2>
 <details><summary>Quando o curso abre?</summary><p>O lançamento está previsto para 18/01/2027. Quem estiver na lista de espera será avisado primeiro.</p></details>
 <details><summary>Com que idade posso participar?</summary><p>O alistamento acontece no ano em que você completa 18 anos (Lei 4.375/64). Dá pra começar a se preparar antes.</p></details>
@@ -41,20 +41,20 @@
 <details id="privacidade"><summary>Política de privacidade</summary><p>Coletamos nome, WhatsApp e e-mail apenas para avisar sobre o lançamento do RumoNPOR. Os dados não são vendidos. O envio é processado pelo serviço FormSubmit e armazenado em planilha privada do projeto. Você pode pedir a exclusão ou sair da lista a qualquer momento pelo Instagram @rumonpor. Base legal: consentimento (LGPD, Lei 13.709/2018).</p></details>
 <small>© 2026 RumoNPOR</small></div></footer>
 <script>
-// ===== ENVIO: FormSubmit -> e-mail -> planilha "curso NPOR" =====
-const FORM_URL = "https://formsubmit.co/ajax/0dc058618bec036d7c23907687b87446";
+// ===== ENVIO: POST normal para FormSubmit -> obrigado.html =====
 // =================================================
 const alvo=new Date("2027-01-18T00:00:00-03:00").getTime();
 function tick(){let t=Math.max(0,alvo-Date.now());const z=n=>String(n).padStart(2,"0");
 d.textContent=Math.floor(t/864e5);h.textContent=z(Math.floor(t/36e5)%24);m.textContent=z(Math.floor(t/6e4)%60);s.textContent=z(Math.floor(t/1e3)%60);}
 tick();setInterval(tick,1000);
-f.addEventListener("submit",async e=>{e.preventDefault();const o=msg;
-const nome=f.nome.value.trim(),tel=f.whats.value.replace(/\D/g,""),email=f.email.value.trim();
-if(!nome||tel.length<10||tel.length>13||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!f.lgpd.checked){o.textContent="Preencha todos os campos corretamente e aceite os termos.";return;}
-const hp=f.querySelector('[name="_honey"]');if(hp&&hp.value)return;
-const dados={_subject:"RUMONPOR-INSCRICAO",_template:"table",_captcha:"false",Nome:nome,WhatsApp:tel,"E-mail":email,"Consentimento LGPD":"Aceito",Origem:"site"};
-o.textContent="Enviando...";
-try{const r=await fetch(FORM_URL,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(dados)});const j=await r.json().catch(()=>({}));
-if(r.ok&&String(j.success)==="true"){f.reset();o.textContent="Pronto! Você está na lista de espera.";}else throw 0;}
-catch(_){o.textContent="Não foi possível enviar. Tente novamente ou fale com @rumonpor.";}});
+let enviando=false;
+f.addEventListener("submit",e=>{const o=msg,E=f.elements;
+if(enviando){e.preventDefault();return;}
+const nome=E["Nome"].value.trim(),tel=E["WhatsApp"].value.replace(/\D/g,""),email=E["E-mail"].value.trim();
+if(!nome||tel.length<10||tel.length>13||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!E["Consentimento LGPD"].checked){e.preventDefault();o.textContent="Preencha todos os campos corretamente e aceite os termos.";return;}
+if(E["_honey"].value){e.preventDefault();return;}
+E["Nome"].value=nome;E["WhatsApp"].value=tel;E["E-mail"].value=email;
+enviando=true;bt.disabled=true;bt.textContent="Enviando...";
+o.textContent="Enviando sua inscrição. Pode levar até 1 minuto, não feche a página.";});
+window.addEventListener("pageshow",()=>{enviando=false;bt.disabled=false;bt.textContent="Entrar na lista";});
 </script></body></html>
